@@ -1,0 +1,61 @@
+body{
+	background-color: green;
+	color: white;
+	box-sizing: border-box;
+	font-family: georgia, serif;
+}
+
+.playerLook{
+	color: red;
+}
+
+.bankerLook{
+	color: yellow;
+}
+
+.centered{
+	text-align: center;
+}
+
+.bordered{
+	border: .5vmin solid;
+	border-radius: 1vmin;
+	margin: 1vmin
+}
+
+.cardPlace{
+	font-size:6vmin;
+	padding:0px;
+	height: 24vmin;
+}
+
+.propBet{
+	width: 25%;
+	height: 8vmin;
+	font-size: 2.2vmin;
+	display:inline-block;
+}
+
+.regBet{
+	font-size: 3vmin;
+	margin: 20px 10%;
+	padding: 2vmin 0px;
+	height: 8vmin;
+}
+
+.chipSpot{
+	
+}
+
+.chip{
+	position: absolute;
+	height: 8vmin;
+	filter: drop-shadow(6px 6px 10px black);
+}
+
+.card{
+	position: absolute;
+	height: 20vmin;
+	filter: drop-shadow(6px 6px 10px black);
+	
+}
