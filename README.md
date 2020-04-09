@@ -1,0 +1,1 @@
+This is a browser-based baccarat card game - a personal project by Justin Turcotte.
