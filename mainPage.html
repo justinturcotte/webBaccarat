@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title>Baccarat Game</title>
 		<link rel="stylesheet" href="styles.css">
-		<script type="text/javascript" src="baccaratGame.js"></script>
+		<meta charset="UTF-8" />
 	</head>
 	<body>
 		<header>
@@ -14,17 +14,17 @@
 			<div class="bordered playerLook stdHeight">
 				<div class="cardSlotTitle">PLAYER</div>
 				<div class="cardSquare">
-					<div class="subCardSquare"><img src="deckAssets/KS.png" alt="Card" class="card"></div>
-					<div class="subCardSquare"><img src="deckAssets/3D.png" alt="Card" class="card"></div>
-					<div class="subCardSquare"><img src="deckAssets/AC.png" alt="Card" class="card"></div>
+					<div class="subCardSquare"><img class="card pCard0"></div>
+					<div class="subCardSquare"><img class="card pCard1"></div>
+					<div class="subCardSquare"><img class="card pCard2"></div>
 				</div>
 			</div>
 			<div class="bordered bankerLook stdHeight">
 				<div class="cardSlotTitle">BANKER</div>
 				<div class="cardSquare">
-					<div class="subCardSquare"><img src="deckAssets/QH.png" alt="Card" class="card"></div>
-					<div class="subCardSquare"><img src="deckAssets/2C.png" alt="Card" class="card"></div>
-					<div class="subCardSquare"><img src="deckAssets/JC.png" alt="Card" class="card"></div>
+					<div class="subCardSquare"><img class="card bCard0"></div>
+					<div class="subCardSquare"><img class="card bCard1"></div>
+					<div class="subCardSquare"><img class="card bCard2"></div>
 				</div>
 			</div>
 			<div class="propBet bordered playerLook">
@@ -74,6 +74,8 @@
 				YOU HOLD $1000
 			</div>
 		</div>
+		<script src="jquery-3.4.1.min.js" type="text/javascript"></script>
+		<script src="baccaratGame.js" type="text/javascript"></script>
 	</body>
 
 </html>
