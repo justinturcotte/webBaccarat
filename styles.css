@@ -1,8 +1,11 @@
-body{
+html, body{
+	height: 100%;
 	background-color: darkgreen;
+	background-image: linear-gradient(black, darkgreen);
 	color: white;
 	box-sizing: border-box;
-	font-family: georgia, serif;
+	font-family: serif;
+	overflow: hidden;
 }
 
 .playerLook{
@@ -34,7 +37,7 @@ body{
 
 .propBet{
 	width: 12%;
-	height: 25vmin;
+	height: 20vmin;
 	font-size: 2.6vmin;
 	display:inline-block;
 }
@@ -52,33 +55,41 @@ body{
 	filter: drop-shadow(6px 6px 10px black);
 }
 
+.chipValue{
+	color: black;
+  	position: absolute;
+  	top: 50%;
+ 	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
 .cardSquare{
 	width: 100%;
-	height:80%;
+	height:78%;
 }
 
 .card{
 	height:100%;
 	margin:0px auto;
-	padding: 0px;
+	padding: 0%;
 	height: 97%;
 	filter: drop-shadow(6px 6px 10px black);
 }
 
 .betName{
 	width: 100%;
-	height: 35%;
+	height: 32%;
 }
 
 .betPayout{
 	width: 100%;
-	height: 20%;
+	height: 23%;
 	padding: 7% 0 0 0;
 }
 
 .cardSlotTitle{
 	width: 100%;
-	height: 20%;
+	height: 22%;
 }
 
 .subCardSquare{
@@ -86,4 +97,33 @@ body{
 	width: 25%;
 	height: 97%;
 	display:inline-block;
+}
+
+input[type=number]{
+	font-family: serif;
+	font-size: 2.2vmin;
+	width: 80%;
+	border-radius:.5vmin;
+}
+
+button{
+	font-family: serif;
+	background-color: black;
+	padding:0.35em 1.2em;
+	border:0.1em solid white;
+	margin: .8vmin;
+	border-radius:1vmin;
+	color:white;
+	transition: all 0.2s;
+	font-size: 2.2vmin;
+}
+
+button:hover{
+	color:#000000;
+	background-color:#FFFFFF;
+}
+
+.playerWallet{
+	font-size:5vmin;
+	margin: 2vmin;
 }

@@ -3,6 +3,7 @@
 	<head>
 		<title>Baccarat Game</title>
 		<link rel="stylesheet" href="styles.css">
+		<script type="text/javascript" src="baccaratGame.js"></script>
 	</head>
 	<body>
 		<header>
@@ -29,32 +30,48 @@
 			<div class="propBet bordered playerLook">
 				<div class="betName">PLAYER<br>PAIR</div>
 				<div class="chipSquare">
-					<img src="otherAssets/blackChip.png" alt="Casino Chip" class="chip"></div>
+					<input type="number" placeholder="$" min=1 max=999 step=1/>
+					<button type="button" class="betButton">BET</button>
+				</div>
 				<div class="betPayout">12 FOR 1</div>
 			</div>
 			<div class="propBet bordered">
 				<div class="betName">TIE</div>
 				<div class="chipSquare">
-					<img src="otherAssets/blackChip.png" alt="Casino Chip" class="chip"></div>
+					<input type="number" placeholder="$" min=1 max=1000 />
+					<button type="button" class="betButton">BET</button>
+				</div>
 				<div class="betPayout">9 FOR 1</div>
 			</div>				
 			<div class="propBet bordered bankerLook">
 				<div class="betName">BANKER<br>PAIR</div>
 				<div class="chipSquare">
-					<img src="otherAssets/blackChip.png" alt="Casino Chip" class="chip"></div>
+					<input type="number" placeholder="$" min=1 max=1000 />
+					<button type="button" class="betButton">BET</button>
+				</div>
 				<div class="betPayout">12 FOR 1</div>		
 			</div>		
 			<div class="propBet bordered bankerLook">
-				<div class="betName">BANK</div>
+				<div class="betName">BANKER</div>
 				<div class="chipSquare">
-					<img src="otherAssets/blackChip.png" alt="Casino Chip" class="chip"></div>
+					<input type="number" placeholder="$" min=1 max=1000 />
+					<button type="button" class="betButton">BET</button>
+				</div>
 				<div class="betPayout">1 FOR 1</div>		
 			</div>	
 			<div class="propBet bordered playerLook">
 				<div class="betName">PLAYER</div>
 				<div class="chipSquare">
-					<img src="otherAssets/blackChip.png" alt="Casino Chip" class="chip"></div>
+					<img src="otherAssets/blackChip.png" alt="Casino Chip" class="chip">
+						<div class="chipValue"><strong>$100</strong></div>
+				</div>
 				<div class="betPayout">1 FOR 1</div>			
+			</div>
+			<div>
+			<button type="button" class="betButton">DEAL THE CARDS</button>
+			</div>
+			<div class="playerWallet bordered">
+				YOU HOLD $1000
 			</div>
 		</div>
 	</body>
