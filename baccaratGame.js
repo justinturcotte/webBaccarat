@@ -18,54 +18,73 @@ var bankerHitTable = [
 var playerTot = 0;
 var bankerTot = 0;
 
-function getRandomInt(max) {
-	return Math.floor(Math.random() * Math.floor(max+1));
+function shuffleCards(){
+	
+	function getRandomInt(max) {
+		return Math.floor(Math.random() * Math.floor(max+1));
+	}
+	
+	for(let i=unshuffledFaces.length-1; i>=0; i--){
+		let temp = getRandomInt(i);
+		shuffledFaces.push(unshuffledFaces.splice(temp,1));
+		shuffledValues.push(unshuffledValues.splice(temp,1));
+	}
+	
+	shuffledValues = shuffledValues.map(Number);
 }
 
-for(let i=unshuffledFaces.length-1; i>=0; i--){
-	let temp = getRandomInt(i);
-	shuffledFaces.push(unshuffledFaces.splice(temp,1));
-	shuffledValues.push(unshuffledValues.splice(temp,1));
-}
-shuffledValues = shuffledValues.map(Number);
+shuffleCards();
 
 //for(let i=0; i<shuffledFaces.length; i++){
 	//console.log(shuffledFaces[i] + " " + shuffledValues[i]);
 //}
 
-for (let i=0; i<2; i++) {
-	playerFaces[i]=shuffledFaces.pop();
-	$(".pCard"+i).attr("src","deckAssets/"+playerFaces[i]+".png");
-	playerValues[i]=shuffledValues.pop();
-	playerTot += playerValues[i];
-	bankerFaces[i]=shuffledFaces.pop();
-	$(".bCard"+i).attr("src","deckAssets/"+bankerFaces[i]+".png");
-	bankerValues[i]=shuffledValues.pop();
-	bankerTot += bankerValues[i];
-}
+function playHand(){
+	
+	for (let i=0; i<2; i++) {
+		playerFaces[i]=shuffledFaces.pop();
+		$(".pCard"+i).attr("src","deckAssets/"+playerFaces[i]+".png");
+		playerValues[i]=shuffledValues.pop();
+		playerTot += playerValues[i];
+		bankerFaces[i]=shuffledFaces.pop();
+		$(".bCard"+i).attr("src","deckAssets/"+bankerFaces[i]+".png");
+		bankerValues[i]=shuffledValues.pop();
+		bankerTot += bankerValues[i];
+	}
 
-if (playerTot>9){
-	playerTot -= 10;
-}
-
-if (bankerTot>9){
-	bankerTot -= 10;
-}
-
-
-if (playerTot===8 || playerTot===9 || bankerTot===8 || bankerTot===9){
-	console.log("Natural!")
-}
-
-else if (playerTot<6){
-	playerFaces[2]=shuffledFaces.pop();
-	$(".pCard2").attr("src","deckAssets/"+playerFaces[2]+".png");
-	playerValues[2]=shuffledValues.pop();
-	playerTot += playerValues[2];
 	if (playerTot>9){
 		playerTot -= 10;
 	}
-	if (bankerHitTable[bankerTot][playerValues[2]]){
+
+	if (bankerTot>9){
+		bankerTot -= 10;
+	}
+
+
+	if (playerTot===8 || playerTot===9 || bankerTot===8 || bankerTot===9){
+		console.log("Natural!")
+	}
+
+	else if (playerTot<6){
+		playerFaces[2]=shuffledFaces.pop();
+		$(".pCard2").attr("src","deckAssets/"+playerFaces[2]+".png");
+		playerValues[2]=shuffledValues.pop();
+		playerTot += playerValues[2];
+		if (playerTot>9){
+			playerTot -= 10;
+		}
+		if (bankerHitTable[bankerTot][playerValues[2]]){
+			bankerFaces[2]=shuffledFaces.pop();
+			$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png");
+			bankerValues[2]=shuffledValues.pop();
+			bankerTot += bankerValues[2];
+			if (bankerTot>9){
+				bankerTot -= 10;
+			}
+		}
+	}
+
+	else if (bankerTot<6){
 		bankerFaces[2]=shuffledFaces.pop();
 		$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png");
 		bankerValues[2]=shuffledValues.pop();
@@ -73,18 +92,94 @@ else if (playerTot<6){
 		if (bankerTot>9){
 			bankerTot -= 10;
 		}
-	}
+	}	
 }
 
-else if (bankerTot<6){
-	bankerFaces[2]=shuffledFaces.pop();
-	$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png");
-	bankerValues[2]=shuffledValues.pop();
-	bankerTot += bankerValues[2];
-	if (bankerTot>9){
-		bankerTot -= 10;
-	}
-}
+playHand();
 
-console.log(playerTot);
-console.log(bankerTot);
+
+var youHold = 1000;
+var playerPairBet=0;
+var tieBet=0;
+var bankerPairBet=0;
+var BankerBet=0;
+var playerBet=0;
+
+
+$(".playerPairBetBtn").click(function() {
+	(playerPairBet=$(".playerPairBet").val());
+	if(playerPairBet>youHold){playerPairBet=youHold}
+	if(playerPairBet>0){
+		youHold -= playerPairBet;
+		$(".playerPairBetBtn").remove();
+		$(".playerPairBet").remove();
+		$(".playerPairBetChip").attr("src","otherAssets/blackChip.png");
+		$(".playerPairChipValue").text("$"+playerPairBet);
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		console.log("Player pair bet: $" + playerPairBet);
+		console.log("You hold: $" + youHold);
+	}
+});
+
+$(".bankerPairBetBtn").click(function() {
+	(bankerPairBet=$(".bankerPairBet").val());
+	if(bankerPairBet>youHold){bankerPairBet=youHold}
+	if(bankerPairBet>0){
+		youHold -= bankerPairBet;
+		$(".bankerPairBetBtn").remove();
+		$(".bankerPairBet").remove();
+		$(".bankerPairBetChip").attr("src","otherAssets/blackChip.png");
+		$(".bankerPairChipValue").text("$"+bankerPairBet);
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		console.log("Banker pair bet: $" + bankerPairBet);
+		console.log("You hold: $" + youHold);
+	}
+});
+
+$(".tieBetBtn").click(function() {
+	(tieBet=$(".tieBet").val());
+	if(tieBet>youHold){tieBet=youHold}
+	if(tieBet>0){
+		youHold -= tieBet;
+		$(".tieBetBtn").remove();
+		$(".tieBet").remove();
+		$(".tieBetChip").attr("src","otherAssets/blackChip.png");
+		$(".tieChipValue").text("$"+tieBet);
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		console.log("Tie bet: $" + tieBet);
+		console.log("You hold: $" + youHold);
+	}
+});
+
+$(".bankerBetBtn").click(function() {
+	(bankerBet=$(".bankerBet").val());
+	if(bankerBet>youHold){bankerBet=youHold}
+	if(bankerBet>0){
+		youHold -= bankerBet;
+		$(".bankerBetBtn").remove();
+		$(".bankerBet").remove();
+		$(".bankerBetChip").attr("src","otherAssets/blackChip.png");
+		$(".bankerChipValue").text("$"+bankerBet);
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		console.log("Banker bet: $" + bankerBet);
+		console.log("You hold: $" + youHold);
+	}
+});
+
+$(".playerBetBtn").click(function() {
+	(playerBet=$(".playerBet").val());
+	if(playerBet>youHold){playerBet=youHold}
+	if(playerBet>0){
+		youHold -= playerBet;
+		$(".playerBetBtn").remove();
+		$(".playerBet").remove();
+		$(".playerBetChip").attr("src","otherAssets/blackChip.png");
+		$(".playerChipValue").text("$"+playerBet);
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		console.log("Player bet: $" + playerBet);
+		console.log("You hold: $" + youHold);
+	}
+});
+
+console.log("player score " + playerTot);
+console.log("banker score " + bankerTot);
