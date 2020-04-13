@@ -66,12 +66,12 @@ function playHand(){
 	
 	for (let i=0; i<2; i++) {
 		playerFaces[i]=shuffledFaces.pop();
-		$(".pCard"+i).attr("src","deckAssets/"+playerFaces[i]+".png");
+		$(".pCard"+i).attr("src","deckAssets/"+playerFaces[i]+".png").show();
 		playerValues[i]=shuffledValues.pop();
 		console.log(playerFaces[i] + " " + playerValues[i]);
 		playerTot += playerValues[i];
 		bankerFaces[i]=shuffledFaces.pop();
-		$(".bCard"+i).attr("src","deckAssets/"+bankerFaces[i]+".png");
+		$(".bCard"+i).attr("src","deckAssets/"+bankerFaces[i]+".png").show();
 		bankerValues[i]=shuffledValues.pop();
 		console.log(bankerFaces[i] + " " + bankerValues[i]);
 		bankerTot += bankerValues[i];
@@ -91,7 +91,7 @@ function playHand(){
 
 	else if (playerTot<6){
 		playerFaces[2]=shuffledFaces.pop();
-		$(".pCard2").attr("src","deckAssets/"+playerFaces[2]+".png");
+		$(".pCard2").attr("src","deckAssets/"+playerFaces[2]+".png").show();
 		playerValues[2]=shuffledValues.pop();
 		console.log(playerFaces[2] + " " + playerValues[2]);
 		playerTot += playerValues[2];
@@ -100,7 +100,7 @@ function playHand(){
 		}
 		if (bankerHitTable[bankerTot][playerValues[2]]){
 			bankerFaces[2]=shuffledFaces.pop();
-			$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png");
+			$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png").show();
 			bankerValues[2]=shuffledValues.pop();
 			console.log(bankerFaces[2] + " " + bankerValues[2]);
 			bankerTot += bankerValues[2];
@@ -112,7 +112,7 @@ function playHand(){
 
 	else if (bankerTot<6){
 		bankerFaces[2]=shuffledFaces.pop();
-		$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png");
+		$(".bCard2").attr("src","deckAssets/"+bankerFaces[2]+".png").show();
 		bankerValues[2]=shuffledValues.pop();
 		console.log(bankerFaces[2] + " " + bankerValues[2]);
 		bankerTot += bankerValues[2];
@@ -230,12 +230,11 @@ $(".dealButton").click(function() {
 		bankerBet=0;
 		playerBet=0;
 		$(".allBets").text(" ");
-		$(".card").removeAttr('src');
-		$(".chip").removeAttr('src');
+		$(".card").removeAttr('src').hide();
+		$(".chip").removeAttr('src').hide();
 		$(".chipValue").text(" ");
 		$(".betBtn").show();
-		$(".bet").show();
-		$(".bet").val(null);
+		$(".bet").show().val(null);
 		$(".dealButton").text("DEAL THE CARDS");
 	}
 });
@@ -247,7 +246,7 @@ $(".playerPairBetBtn").click(function() {
 		youHold -= playerPairBet;
 		$(".playerPairBetBtn").hide();
 		$(".playerPairBet").hide();
-		$(".playerPairBetChip").attr("src","otherAssets/blackChip.png");
+		$(".playerPairBetChip").attr("src","otherAssets/blackChip.png").show();
 		$(".playerPairChipValue").text("$"+playerPairBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		console.log("Player pair bet: $" + playerPairBet);
@@ -262,7 +261,7 @@ $(".bankerPairBetBtn").click(function() {
 		youHold -= bankerPairBet;
 		$(".bankerPairBetBtn").hide();
 		$(".bankerPairBet").hide();
-		$(".bankerPairBetChip").attr("src","otherAssets/blackChip.png");
+		$(".bankerPairBetChip").attr("src","otherAssets/blackChip.png").show();
 		$(".bankerPairChipValue").text("$"+bankerPairBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		console.log("Banker pair bet: $" + bankerPairBet);
@@ -277,7 +276,7 @@ $(".tieBetBtn").click(function() {
 		youHold -= tieBet;
 		$(".tieBetBtn").hide();
 		$(".tieBet").hide();
-		$(".tieBetChip").attr("src","otherAssets/blackChip.png");
+		$(".tieBetChip").attr("src","otherAssets/blackChip.png").show();
 		$(".tieChipValue").text("$"+tieBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		console.log("Tie bet: $" + tieBet);
@@ -292,7 +291,7 @@ $(".bankerBetBtn").click(function() {
 		youHold -= bankerBet;
 		$(".bankerBetBtn").hide();
 		$(".bankerBet").hide();
-		$(".bankerBetChip").attr("src","otherAssets/blackChip.png");
+		$(".bankerBetChip").attr("src","otherAssets/blackChip.png").show();
 		$(".bankerChipValue").text("$"+bankerBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		console.log("Banker bet: $" + bankerBet);
@@ -307,7 +306,7 @@ $(".playerBetBtn").click(function() {
 		youHold -= playerBet;
 		$(".playerBetBtn").hide();
 		$(".playerBet").hide();
-		$(".playerBetChip").attr("src","otherAssets/blackChip.png");
+		$(".playerBetChip").attr("src","otherAssets/blackChip.png").show();
 		$(".playerChipValue").text("$"+playerBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		console.log("Player bet: $" + playerBet);
