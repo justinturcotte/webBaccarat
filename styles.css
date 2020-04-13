@@ -9,7 +9,7 @@ html, body{
 }
 
 header{
-	
+
   font: 400 100px/1.3 'Arizonia', serif;
   color: white;
   font-size: 10vmin;
@@ -155,7 +155,7 @@ button:hover{
 	position: absolute;
 	width: 22vmin;
 	height: 42vmin;
-	
+
 }
 
 .chipStack{
@@ -168,5 +168,31 @@ button:hover{
 	width: 22vmin;
 	height: 50vmin;
 	font-size: 2.5vmin;
-	
+
 }
+
+.rulesOverlay{
+	color: white;
+	font-size: 6vmin;
+	position: absolute;
+	text-align: center;
+	width: 90%;
+	height: 90%;
+	background-color: black;
+	z-index:1;
+	border: 1vmin solid white;
+	border-radius: 4vmin;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+iframe{
+	width: 95%;
+	height: 70%;
+	margin: 3vmin;
+}
+ .closeWindow{
+	 	margin: 0;
+		font-size: 4vmin;
+ }

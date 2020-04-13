@@ -28,24 +28,24 @@ var playerPair;
 var bankerPair;
 
 function shuffleCards(){
-	
+
 	unshuffledFaces = ["AC","AD","AH","AS","2C","2D","2H","2S","3C","3D","3H","3S","4C","4D","4H","4S","5C","5D","5H","5S","6C","6D","6H","6S","7C","7D","7H","7S","8C","8D","8H","8S","9C","9D","9H","9S","10C","10D","10H","10S","JC","JD","JH","JS","QC","QD","QH","QS","KC","KD","KH","KS"];
 	unshuffledValues = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	shuffledFaces = [];
 	shuffledValues = [];
-	
+
 	function getRandomInt(max) {
 		return Math.floor(Math.random() * Math.floor(max+1));
 	}
-	
+
 	for(let i=unshuffledFaces.length-1; i>=0; i--){
 		let temp = getRandomInt(i);
 		shuffledFaces.push(unshuffledFaces.splice(temp,1));
 		shuffledValues.push(unshuffledValues.splice(temp,1));
 	}
-	
+
 	shuffledValues = shuffledValues.map(Number);
-	
+
 	for(let i=0; i<shuffledFaces.length; i++){
 		console.log(shuffledFaces[i] + " " + shuffledValues[i]);
 	}
@@ -59,11 +59,11 @@ function playHand(){
 	bankerValues = [];
 	playerTot=0;
 	bankerTot=0;
-	
+
 	if (shuffledFaces.length<6){
 		shuffleCards();
 		}
-	
+
 	for (let i=0; i<2; i++) {
 		playerFaces[i]=shuffledFaces.pop();
 		$(".pCard"+i).attr("src","deckAssets/"+playerFaces[i]+".png").show();
@@ -120,7 +120,7 @@ function playHand(){
 			bankerTot -= 10;
 		}
 	}
-	
+
 	if (playerTot>bankerTot){
 		return("PLAYER WINS");
 	}
@@ -199,7 +199,7 @@ function checkPlayerBet(){
 }
 
 $(".dealButton").click(function() {
-	
+
 	if($(".dealButton").text().indexOf("DEAL THE CARDS") !== -1) {
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		winner=playHand();
@@ -222,7 +222,7 @@ $(".dealButton").click(function() {
 		$(".playerWallet").text("YOU HOLD $"+youHold);
 		$(".dealButton").text("NEXT HAND");
 	}
-	
+
 	else if($(".dealButton").text().indexOf("NEXT HAND") !== -1) {
 		playerPairBet=0;
 		tieBet=0;
@@ -314,4 +314,6 @@ $(".playerBetBtn").click(function() {
 	}
 });
 
-
+$(".closeWindow").click(function() {
+	$(".rulesOverlay").empty().hide();
+});
