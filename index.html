@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Baccarat Game</title>
+		<link rel="stylesheet" href="styles.css">
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<header>
+			<div>Baccarat Casino</div>
+		</header>
+		<div class=walletSquare>
+		<img src="otherAssets/chipStack.png" class=chipStack>
+		<div class="playerWallet">YOU HOLD $1000</div>	
+		</div>
+		<div class="logSquare">
+		<h1 id= "lastGame" class="allBets"></h1>
+		<h2 id="winner" class="allBets"></h2>
+		<h2 id="playerScore" class="allBets"></h2>
+		<h2 id="bankerScore" class="allBets"></h2>
+		<h2 id="playerPair" class="allBets"></h2>
+		<h2 id="bankerPair" class="allBets"></h2>
+		<h2 id="tieBetResults" class="allBets"></h2>
+		<h2 id="bankerBetResults" class="allBets"></h2>
+		<h2 id="playerBetResults" class="allBets"></h2>
+		</div>
+		<div class="centered">
+			<div class="bordered playerLook stdHeight">
+				<div class="cardSlotTitle">PLAYER</div>
+				<div class="cardSquare">
+					<div class="subCardSquare"><img class="card pCard0"></div>
+					<div class="subCardSquare"><img class="card pCard1"></div>
+					<div class="subCardSquare"><img class="card pCard2"></div>
+				</div>
+			</div>
+			<div class="bordered bankerLook stdHeight">
+				<div class="cardSlotTitle">BANKER</div>
+				<div class="cardSquare">
+					<div class="subCardSquare"><img class="card bCard0"></div>
+					<div class="subCardSquare"><img class="card bCard1"></div>
+					<div class="subCardSquare"><img class="card bCard2"></div>
+				</div>
+			</div>
+			<div class="propBet bordered playerLook">
+				<div class="betName">PLAYER<br>PAIR</div>
+				<div class="chipSquare">
+					<input type="number" class="playerPairBet bet" placeholder="$" min=1 max=1000 step=1/>
+					<button type="button" class="playerPairBetBtn betBtn">BET</button>
+					<img class="chip playerPairBetChip">
+					<div class="chipValue playerPairChipValue"></div>
+				</div>
+				<div class="betPayout">12 FOR 1</div>
+			</div>
+			<div class="propBet bordered bankerLook">
+				<div class="betName">BANKER<br>PAIR</div>
+				<div class="chipSquare">
+					<input type="number" class="bankerPairBet bet" placeholder="$" min=1 max=1000 />
+					<button type="button" class="bankerPairBetBtn betBtn">BET</button>
+					<img class="chip bankerPairBetChip">
+					<div class="chipValue bankerPairChipValue"></div>
+				</div>
+				<div class="betPayout">12 FOR 1</div>		
+			</div>
+			<div class="propBet bordered">
+				<div class="betName">TIE</div>
+				<div class="chipSquare">
+					<input type="number" class="tieBet bet" placeholder="$" min=1 max=1000 />
+					<button type="button" class="tieBetBtn betBtn">BET</button>
+					<img class="chip tieBetChip">
+					<div class="chipValue tieChipValue"></div>
+				</div>
+				<div class="betPayout">9 FOR 1</div>
+			</div>					
+			<div class="propBet bordered bankerLook">
+				<div class="betName">BANKER</div>
+				<div class="chipSquare">
+					<input type="number" class="bankerBet bet" placeholder="$" min=1 max=1000 />
+					<button type="button" class="bankerBetBtn betBtn">BET</button>
+					<img class="chip bankerBetChip">
+					<div class="chipValue bankerChipValue"></div>
+				</div>
+				<div class="betPayout">1 FOR 1</div>		
+			</div>	
+			<div class="propBet bordered playerLook">
+				<div class="betName">PLAYER</div>
+				<div class="chipSquare">
+					<input type="number" class="playerBet bet" placeholder="$" min=1 max=1000 />
+					<button type="button" class="playerBetBtn betBtn">BET</button>
+					<img class="chip playerBetChip">
+					<div class="chipValue playerChipValue"></div>
+				</div>
+				<div class="betPayout">1 FOR 1</div>			
+			</div>
+			<div>
+			<button type="button" class="dealButton">DEAL THE CARDS</button>
+			</div>
+
+		</div>
+		<script src="jquery-3.4.1.min.js" type="text/javascript"></script>
+		<script src="baccaratGame.js" type="text/javascript"></script>
+		<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+		
+	</body>
+
+</html>
