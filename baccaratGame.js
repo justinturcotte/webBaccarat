@@ -22,8 +22,10 @@ var youHold = 1000;
 var playerPairBet=0;
 var tieBet=0;
 var bankerPairBet=0;
-var BankerBet=0;
+var bankerBet=0;
 var playerBet=0;
+var playerPair;
+var bankerPair;
 
 function shuffleCards(){
 	
@@ -128,20 +130,114 @@ function playHand(){
 	else{
 		return("TIE");
 	}
-	
-	console.log("Cards left: " + shuffledFaces.length);
-	
+}
+
+function checkPlayerPair(){
+	if((playerFaces[0].toString().substring(0, playerFaces[0].toString().length - 1))===(playerFaces[1].toString().substring(0, playerFaces[1].toString().length - 1))){
+		playerPair=true;
+		$("#playerPair").text("PLAYER PAIR");
+		}
+	else{playerPair=false;}
+}
+
+function checkBankerPair(){
+	if((bankerFaces[0].toString().substring(0, bankerFaces[0].toString().length - 1))===(bankerFaces[1].toString().substring(0, bankerFaces[1].toString().length - 1))){
+		bankerPair=true;
+		$("#bankerPair").text("BANKER PAIR");
+		}
+	else{bankerPair=false;}
+}
+
+function checkPlayerPairBet(){
+	if(playerPairBet!=0 && playerPair===true){
+		$("#playerPair").text("PLAYER PAIR BET RESULT: +$" + playerPairBet*12);
+		youHold += (playerPairBet*13);
+	}
+	if(playerPairBet!=0 && playerPair===false){
+		$("#playerPair").text("PLAYER PAIR BET RESULT: -$" + playerPairBet);
+	}
+}
+
+function checkBankerPairBet(){
+	if(bankerPairBet!=0 && bankerPair===true){
+		$("#bankerPair").text("BANKER PAIR BET RESULT: +$" + bankerPairBet*12);
+		youHold += (playerPairBet*13);
+	}
+	if(bankerPairBet!=0 && bankerPair===false){
+		$("#bankerPair").text("BANKER PAIR BET RESULT: -$" + bankerPairBet);
+	}
+}
+
+function checkTieBet(){
+	if(tieBet!=0 && winner==="TIE"){
+		$("#tieBetResults").text("TIE BET RESULT: +$" + tieBet*9);
+		youHold += (tieBet*10);
+	}
+	if(tieBet!=0 && winner!="TIE"){
+		$("#tieBetResults").text("TIE BET RESULT: -$" + tieBet);
+	}
+}
+
+function checkBankerBet(){
+	if(bankerBet!=0 && winner==="BANKER WINS"){
+		$("#bankerBetResults").text("BANKER BET RESULT: +$" + bankerBet);
+		youHold += (bankerBet*2);
+	}
+	if(bankerBet!=0 && winner!="BANKER WINS"){
+		$("#bankerBetResults").text("BANKER BET RESULT: -$" + bankerBet);
+	}
+}
+
+function checkPlayerBet(){
+	if(playerBet!=0 && winner==="PLAYER WINS"){
+		$("#playerBetResults").text("PLAYER BET RESULT: +$" + playerBet);
+		youHold += (playerBet*2);
+	}
+	if(playerBet!=0 && winner!="PLAYER WINS"){
+		$("#playerBetResults").text("PLAYER BET RESULT: -$" + playerBet);
+	}
 }
 
 $(".dealButton").click(function() {
-	$(".card").removeAttr('src');
-	winner=playHand();
-	console.log("Result: " + winner);
-	console.log("player score: " + playerTot);
-	console.log("banker score: " + bankerTot);
-	if((playerFaces[0].toString().substring(0, playerFaces[0].toString().length - 1))===(playerFaces[1].toString().substring(0, playerFaces[1].toString().length - 1))){console.log("player pair")}
-	if((bankerFaces[0].toString().substring(0, bankerFaces[0].toString().length - 1))===(bankerFaces[1].toString().substring(0, bankerFaces[1].toString().length - 1))){console.log("banker pair")}
-	//$(".playerWallet").text("RESULT: " + winner + ". PLAYER SCORE: " + playerTot + ". BANKER SCORE: " + bankerTot);
+	
+	if($(".dealButton").text().indexOf("DEAL THE CARDS") !== -1) {
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		winner=playHand();
+		console.log("Result: " + winner);
+		console.log("player score: " + playerTot);
+		console.log("banker score: " + bankerTot);
+		$("#lastGame").text("GAME RESULTS:")
+		$("#winner").text(winner);
+		$("#playerScore").text("PLAYER SCORE: " + playerTot);
+		$("#bankerScore").text("BANKER SCORE: " + bankerTot);
+		checkPlayerPair();
+		checkBankerPair();
+		checkPlayerPairBet();
+		checkBankerPairBet();
+		checkTieBet();
+		checkBankerBet();
+		checkPlayerBet();
+		$(".betBtn").hide();
+		$(".bet").hide();
+		$(".playerWallet").text("YOU HOLD $"+youHold);
+		$(".dealButton").text("NEXT HAND");
+	}
+	
+	else if($(".dealButton").text().indexOf("NEXT HAND") !== -1) {
+		playerPairBet=0;
+		tieBet=0;
+		bankerPairBet=0;
+		bankerBet=0;
+		playerBet=0;
+		$(".allBets").text(" ");
+		$(".card").removeAttr('src');
+		$(".chip").removeAttr('src');
+		$(".chipValue").text(" ");
+		$(".betBtn").show();
+		$(".bet").show();
+		$(".bet").val(null);
+		$(".dealButton").text("DEAL THE CARDS");
+	}
 });
 
 $(".playerPairBetBtn").click(function() {
@@ -149,8 +245,8 @@ $(".playerPairBetBtn").click(function() {
 	if(playerPairBet>youHold){playerPairBet=youHold}
 	if(playerPairBet>0){
 		youHold -= playerPairBet;
-		$(".playerPairBetBtn").remove();
-		$(".playerPairBet").remove();
+		$(".playerPairBetBtn").hide();
+		$(".playerPairBet").hide();
 		$(".playerPairBetChip").attr("src","otherAssets/blackChip.png");
 		$(".playerPairChipValue").text("$"+playerPairBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
@@ -164,8 +260,8 @@ $(".bankerPairBetBtn").click(function() {
 	if(bankerPairBet>youHold){bankerPairBet=youHold}
 	if(bankerPairBet>0){
 		youHold -= bankerPairBet;
-		$(".bankerPairBetBtn").remove();
-		$(".bankerPairBet").remove();
+		$(".bankerPairBetBtn").hide();
+		$(".bankerPairBet").hide();
 		$(".bankerPairBetChip").attr("src","otherAssets/blackChip.png");
 		$(".bankerPairChipValue").text("$"+bankerPairBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
@@ -179,8 +275,8 @@ $(".tieBetBtn").click(function() {
 	if(tieBet>youHold){tieBet=youHold}
 	if(tieBet>0){
 		youHold -= tieBet;
-		$(".tieBetBtn").remove();
-		$(".tieBet").remove();
+		$(".tieBetBtn").hide();
+		$(".tieBet").hide();
 		$(".tieBetChip").attr("src","otherAssets/blackChip.png");
 		$(".tieChipValue").text("$"+tieBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
@@ -194,8 +290,8 @@ $(".bankerBetBtn").click(function() {
 	if(bankerBet>youHold){bankerBet=youHold}
 	if(bankerBet>0){
 		youHold -= bankerBet;
-		$(".bankerBetBtn").remove();
-		$(".bankerBet").remove();
+		$(".bankerBetBtn").hide();
+		$(".bankerBet").hide();
 		$(".bankerBetChip").attr("src","otherAssets/blackChip.png");
 		$(".bankerChipValue").text("$"+bankerBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
@@ -209,8 +305,8 @@ $(".playerBetBtn").click(function() {
 	if(playerBet>youHold){playerBet=youHold}
 	if(playerBet>0){
 		youHold -= playerBet;
-		$(".playerBetBtn").remove();
-		$(".playerBet").remove();
+		$(".playerBetBtn").hide();
+		$(".playerBet").hide();
 		$(".playerBetChip").attr("src","otherAssets/blackChip.png");
 		$(".playerChipValue").text("$"+playerBet);
 		$(".playerWallet").text("YOU HOLD $"+youHold);
